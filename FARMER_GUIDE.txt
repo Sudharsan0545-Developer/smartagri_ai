@@ -1,0 +1,58 @@
+SMARTAGRI AI - SIMPLE USER GUIDE
+================================
+
+1. Start the program
+---------------------
+Double-click START_SMARTAGRI.bat.
+
+Or run from PowerShell:
+    python app.py
+
+Then open:
+    http://127.0.0.1:5000
+
+2. Login
+--------
+Demo username: student
+Demo password: student123
+
+3. Choose a crop
+----------------
+Open Farmer Dashboard -> Choose Crop.
+
+You only need to select:
+- State
+- District
+- Season
+- Soil health (Weak / Normal / Rich)
+- Water available (Low / Medium / Good)
+- Rainfall (Low / Normal / High)
+- Temperature (Cool / Normal / Hot)
+- Land size in acres
+
+Do NOT enter N, P, K or pH.
+
+4. Understand the result
+-------------------------
+The dashboard shows:
+- Combined recommendation
+- Soil & Weather Random Forest prediction
+- Local History Extra Trees prediction
+- Input analysis graph
+- Local historical crops
+- Practical notes
+
+5. Estimate yield
+-----------------
+Open Estimate Yield.
+Choose the crop, state and season, enter land size in acres, and choose rainfall and temperature levels.
+The result shows two model predictions, the ensemble estimate, model agreement and a local historical reference.
+
+6. Check crop price
+--------------------
+Open Check Price.
+Choose the commodity. The app forecasts the next month from the supplied historical dataset and shows the recent price trend.
+
+IMPORTANT
+---------
+This is a college academic project. The models are trained on the supplied historical datasets and are not connected to live weather or live mandi prices. Use the output as decision support and also consider local agricultural officers, local weather and soil information.

@@ -1,0 +1,5 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="SmartAgri AI farmer-friendly agricultural prediction dashboard"><title>{{ title or 'SmartAgri AI' }}</title><link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"></head><body>
+<div class="bg-orb orb1"></div><div class="bg-orb orb2"></div>
+<nav class="nav"><a class="brand" href="{{ url_for('index') }}"><span class="brand-icon">🌱</span> SmartAgri <b>AI</b></a>{% if session.get('user_id') %}<div class="nav-right"><span>👋 {{ session.get('username') }}</span><a href="{{ url_for('dashboard') }}">Dashboard</a><a href="{{ url_for('logout') }}">Logout</a></div>{% endif %}</nav>
+{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-wrap">{% for cat,msg in messages %}<div class="flash {{cat}}">{{msg}}</div>{% endfor %}</div>{% endif %}{% endwith %}
+{% block content %}{% endblock %}<footer>SmartAgri AI • Farmer-friendly college mini project • Multi-model Machine Learning 🌾</footer></body></html>

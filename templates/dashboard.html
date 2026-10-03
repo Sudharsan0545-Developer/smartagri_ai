@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="dash">
+  <section class="dash-head">
+    <div><div class="eyebrow">FARMER DASHBOARD</div><h1>Tell us about the field.<br><span>We do the difficult maths.</span> 🌱</h1><p>Use familiar choices, then explore the result through two AI models, local history and simple graphs.</p></div>
+    <div class="field-badge"><div class="badge-scene"><span>☀️</span><span>🌳</span><span>🌾</span><span>💧</span></div><small>Farmer mode</small></div>
+  </section>
+
+  <div class="module-tabs"><button class="tab active" data-tab="crop">🌾 Choose Crop</button><button class="tab" data-tab="yield">📈 Estimate Yield</button><button class="tab" data-tab="price">💰 Check Price</button></div>
+
+  <section id="crop" class="module active">
+    <div class="module-info"><div><div class="eyebrow">MODULE 01</div><h2>🌾 Which crop suits this field?</h2><p>Use the options you can observe yourself. No NPK or pH entry is needed.</p></div><div class="chip">2 AI viewpoints + hybrid answer</div></div>
+    <form id="cropForm" class="form-grid">
+      <label>State <span class="hint">📍 Where is the farm?</span><select id="stateSelect" name="State_Name" required>{% for x in options.states %}<option value="{{x}}">{{x}}</option>{% endfor %}</select></label>
+      <label>District <span class="hint">🏡 Your district</span><select id="districtSelect" name="District_Name" required></select></label>
+      <label>Season <span class="hint">🗓️ When will you grow?</span><select name="Season" required>{% for x in options.seasons %}<option value="{{x}}">{{x}}</option>{% endfor %}</select></label>
+      <label>Soil health <span class="hint">🌿 Think about the last crop</span><select name="Soil_Fertility" required><option value="Weak">Weak — crop growth was poor</option><option value="Normal" selected>Normal — average growth</option><option value="Rich">Rich — crop growth was strong</option></select></label>
+      <label>Water available <span class="hint">💧 How much water can you get?</span><select name="Water_Availability" required><option value="Low">Low — little water</option><option value="Medium" selected>Medium — some irrigation</option><option value="Good">Good — enough water</option></select></label>
+      <label>Rainfall <span class="hint">🌧️ Expected this season</span><select name="Rainfall_Level" required><option value="Low">Low — less rain</option><option value="Normal" selected>Normal — usual rain</option><option value="High">High — plenty of rain</option></select></label>
+      <label>Temperature <span class="hint">🌡️ General weather</span><select name="Temperature_Level" required><option value="Low">Cool weather</option><option value="Normal" selected>Normal weather</option><option value="High">Hot weather</option></select></label>
+      <label>Land size (acres) <span class="hint">📐 Enter the land area</span><input type="number" name="Area_Acres" min="0.1" step="0.1" value="2" required></label>
+      <button class="btn primary full" type="submit">🌱 Find suitable crops</button>
+    </form>
+    <div id="cropResult" class="result-panel hidden"></div>
+  </section>
+
+  <section id="yield" class="module">
+    <div class="module-info"><div><div class="eyebrow">MODULE 02</div><h2>📈 How much could I harvest?</h2><p>Enter the crop you plan to grow and a few easy field/weather details. Land size is used only to calculate expected harvest.</p></div><div class="chip">3 regression models</div></div>
+    <form id="yieldForm" class="form-grid">
+      <label>Crop <span class="hint">🌾 What are you planting?</span><select name="Crop" required>{% for x in options.yield_crops %}<option value="{{x}}">{{x}}</option>{% endfor %}</select></label>
+      <label>State <span class="hint">📍 Farm location</span><select name="State" required>{% for x in options.states %}<option value="{{x}}">{{x}}</option>{% endfor %}</select></label>
+      <label>Season <span class="hint">🗓️ Growing season</span><select name="Season" required>{% for x in options.seasons %}<option value="{{x}}">{{x}}</option>{% endfor %}</select></label>
+      <label>Land size (acres) <span class="hint">📐 Your field size</span><input type="number" name="Area_Acres" min="0.1" step="0.1" value="2" required></label>
+      <label>Rainfall level <span class="hint">🌧️ Choose what you expect</span><select name="Rainfall_Level" required><option>Low</option><option selected>Normal</option><option>High</option></select></label>
+      <label>Temperature level <span class="hint">🌡️ General weather</span><select name="Temperature_Level" required><option>Low</option><option selected>Normal</option><option>High</option></select></label>
+      <button class="btn primary full" type="submit">🚜 Estimate harvest</button>
+    </form>
+    <div id="yieldResult" class="result-panel hidden"></div>
+  </section>
+
+  <section id="price" class="module">
+    <div class="module-info"><div><div class="eyebrow">MODULE 03</div><h2>💰 What may the crop price look like next month?</h2><p>Select a crop. The app reads the supplied historical market data and shows two forecasts plus the recent price movement.</p></div><div class="chip">Time-series AI</div></div>
+    <form id="priceForm" class="form-grid single"><label>Commodity <span class="hint">🧺 Choose the crop</span><select name="commodity">{% for x in commodities %}<option value="{{x}}">{{x}}</option>{% endfor %}</select></label><button class="btn primary full" type="submit">💹 Forecast next month</button></form>
+    <div id="priceResult" class="result-panel hidden"></div>
+  </section>
+
+  <section class="model-lab">
+    <div class="section-title"><div><div class="eyebrow">MODEL LAB</div><h2>How the AI was tested</h2></div><p>These metrics are produced from your supplied datasets after running <code>python train_models.py</code>.</p></div>
+    <div class="metric-grid wide">
+      <div class="metric-card"><span>🌱</span><b>Farmer crop model</b><small>{% if metrics.crop %}Random Forest + Extra Trees • best accuracy {{(metrics.crop.models[metrics.crop.best].accuracy*100)|round(2)}}%{% else %}Train models first{% endif %}</small></div>
+      <div class="metric-card"><span>📍</span><b>Local history model</b><small>{% if metrics.history %}Location + season • best accuracy {{(metrics.history.models[metrics.history.best].accuracy*100)|round(2)}}%{% else %}Train models first{% endif %}</small></div>
+      <div class="metric-card"><span>📈</span><b>Yield models</b><small>{% if metrics.yield %}Best R² {{metrics.yield.models[metrics.yield.best].r2|round(3)}}{% else %}Train models first{% endif %}</small></div>
+      <div class="metric-card"><span>💰</span><b>Price models</b><small>{% if metrics.price %}Best R² {{metrics.price.models[metrics.price.best].r2|round(3)}}{% else %}Train models first{% endif %}</small></div>
+    </div>
+  </section>
+
+  <section class="safety-note"><span>ℹ️</span><div><b>Use the dashboard as decision support.</b><p>The recommendations are based on the supplied historical datasets. Local soil tests, weather information and advice from agricultural officers should still be considered before planting.</p></div></section>
+</main>
+<script>window.FARMER_OPTIONS={{ options|tojson }};</script><script src="{{url_for('static',filename='js/app.js')}}"></script>
+{% endblock %}

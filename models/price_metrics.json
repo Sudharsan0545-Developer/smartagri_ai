@@ -1,0 +1,27 @@
+{
+  "module": "Crop Price Forecast",
+  "models": {
+    "Random Forest": {
+      "mae": 378.13561864271,
+      "rmse": 745.4021888726512,
+      "r2": 0.9745885980133346
+    },
+    "Extra Trees": {
+      "mae": 452.3196855438935,
+      "rmse": 964.469818520329,
+      "r2": 0.957457345738546
+    },
+    "Gradient Boosting": {
+      "mae": 537.5714791358583,
+      "rmse": 1466.1684453129687,
+      "r2": 0.9016860747730463
+    }
+  },
+  "selected": [
+    "Random Forest",
+    "Extra Trees",
+    "Gradient Boosting"
+  ],
+  "best": "Random Forest",
+  "latest_month": "2025-03-01"
+}

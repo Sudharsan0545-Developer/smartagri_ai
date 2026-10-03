@@ -1,0 +1,18 @@
+{
+  "module": "Local History Crop Recommendation",
+  "models": {
+    "Extra Trees (Local History)": {
+      "accuracy": 0.7250384024577573,
+      "f1_weighted": 0.7017894486737807
+    },
+    "Logistic Regression (Local History)": {
+      "accuracy": 0.6973886328725039,
+      "f1_weighted": 0.6729028661921006
+    }
+  },
+  "selected": [
+    "Extra Trees (Local History)",
+    "Logistic Regression (Local History)"
+  ],
+  "best": "Extra Trees (Local History)"
+}

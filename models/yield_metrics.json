@@ -1,0 +1,26 @@
+{
+  "module": "Farmer-Friendly Yield Prediction",
+  "models": {
+    "Random Forest": {
+      "mae": 21.00061072420451,
+      "rmse": 333.43261558678785,
+      "r2": 0.8612434104645135
+    },
+    "Extra Trees": {
+      "mae": 14.846423710867267,
+      "rmse": 213.78438564162522,
+      "r2": 0.9429586989688011
+    },
+    "Gradient Boosting": {
+      "mae": 40.992195034620096,
+      "rmse": 534.0879346315342,
+      "r2": 0.6439893478447913
+    }
+  },
+  "selected": [
+    "Random Forest",
+    "Extra Trees",
+    "Gradient Boosting"
+  ],
+  "best": "Extra Trees"
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="landing">
+  <section class="hero farmer-hero">
+    <div>
+      <div class="eyebrow">SMARTAGRI AI • FARMER MODE</div>
+      <h1>Simple farming inputs.<br><span>Smarter crop decisions.</span> 🌾</h1>
+      <p>You do not need to know N, P, K, pH or complicated computer terms. Tell the app what you already know about your field, weather and land — the AI turns it into useful farming guidance.</p>
+      <div class="hero-actions"><a class="btn primary" href="{{ url_for('login') }}">Open Farmer Dashboard →</a><a class="btn ghost" href="#how">See how it works</a></div>
+      <div class="mini-stats"><div><b>4</b><small>Prediction services</small></div><div><b>8+</b><small>ML models</small></div><div><b>0</b><small>Complicated soil tests required</small></div></div>
+    </div>
+    <div class="farm-art interactive-scene" aria-label="Animated farm illustration">
+      <div class="hover-note">Hover the farm 🌱</div><div class="sun">☀️</div><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div>
+      <div class="tree tree1">🌳</div><div class="tree tree2">🌴</div><div class="tractor">🚜</div>
+      <div class="field">🌱 🌾 🌱 🌾 🌱 🌾 🌱 🌾 🌱 🌾</div>
+      <div class="crop-float crop-float-1">🌽</div><div class="crop-float crop-float-2">🥜</div><div class="crop-float crop-float-3">🍚</div>
+    </div>
+  </section>
+  <section id="how" class="feature-grid">
+    <div class="feature hover-card"><span>🌱</span><h3>Easy inputs</h3><p>Choose simple words such as <b>Low / Normal / Good</b> instead of entering lab measurements.</p></div>
+    <div class="feature hover-card"><span>🤖</span><h3>Two AI opinions</h3><p>See separate predictions from two trained models before the combined result is shown.</p></div>
+    <div class="feature hover-card"><span>📊</span><h3>Farmer dashboard</h3><p>Understand why the result was produced using graphs, local history, model agreement and practical notes.</p></div>
+  </section>
+  <section class="farmer-promises">
+    <div><span>📐</span><b>Only useful measurements</b><small>Land size in acres and easy weather levels.</small></div>
+    <div><span>💧</span><b>Observable field conditions</b><small>Water availability and soil health can be selected from descriptions.</small></div>
+    <div><span>💰</span><b>Market awareness</b><small>See a data-based next-month price forecast with historical trend.</small></div>
+  </section>
+</main>
+{% endblock %}
